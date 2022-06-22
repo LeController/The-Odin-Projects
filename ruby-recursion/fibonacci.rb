@@ -19,12 +19,13 @@ def fibs(num)
 end
 
 def fibs_rec(num, arr = [])
-  if num == 0 
-    return arr
-  
+  return [] if num == 0
+  return [0] if num == 1 
+  return [0,1] if num == 2
 
-
-
+  arr = (fibs_rec(num-1))
+  arr.push(arr[-2] + arr[-1])
+  return arr
 end
 
-p fibs_rec(0)
+p fibs_rec(5)
