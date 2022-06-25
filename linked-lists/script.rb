@@ -70,6 +70,14 @@ class LinkedList
     return nil
   end
   
+  def to_s
+    str = ""
+    @linked_list.each do |node|
+      str.concat("( #{node.value} ) -> ")
+    end
+    return str.concat("nil")
+  end
+
 end
 
 
@@ -90,7 +98,6 @@ class Node
   def change_node(new_node)
     @next_node = new_node
   end
-
 end
 
 
@@ -108,7 +115,4 @@ p list1.size
 
 p list1.contains?(0)
 
-p list1.find(0)
-p list1.find(4)
-p list1.find(8)
-p list1.find(6)
+p list1.to_s
