@@ -87,6 +87,15 @@ class LinkedList
     @linked_list[-1].change_node(nil)
   end
 
+  def remove_at(index)
+    @linked_list.delete_at(index)
+    if @linked_list.length > 1
+      @linked_list[index-1..-2].each_with_index do |node, index2|
+        node.change_node(@linked_list[index2+index])
+      end
+    end
+    @linked_list[-1].change_node(nil)
+  end
 end
 
 
@@ -110,22 +119,26 @@ class Node
 end
 
 
-list1 = LinkedList.new()
+# list1 = LinkedList.new()
 
-list1.append(4)
-list1.append(8)
-list1.append(12)
-list1.prepend(0)
-list1.prepend(6)
+# list1.append(4)
+# list1.append(8)
+# list1.append(12)
+# list1.prepend(0)
+# list1.prepend(6)
 
-p list1.list
+# p list1.list
 
-p list1.size
+# p list1.size
 
-p list1.contains?(0)
+# p list1.contains?(0)
 
-p list1.to_s
+# p list1.to_s
 
-list1.insert_at(56, 3)
+# list1.insert_at(56, 3)
 
-p list1.to_s
+# p list1.to_s
+
+# list1.remove_at(3)
+
+# p list1.to_s
