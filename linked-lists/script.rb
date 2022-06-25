@@ -16,8 +16,7 @@ class LinkedList
   end
 
   def prepend(value)
-    start_node = Node.new(value)
-    @linked_list.unshift(start_node)
+    @linked_list.unshift(Node.new(value))
     if @linked_list.length > 1
       @linked_list[0..-2].each_with_index do |node, index|
         node.change_node(@linked_list[index+1])
@@ -78,6 +77,16 @@ class LinkedList
     return str.concat("nil")
   end
 
+  def insert_at(value, index)
+    @linked_list.insert(index, Node.new(value))
+    if @linked_list.length > 1
+      @linked_list[index-1..-2].each_with_index do |node, index2|
+        node.change_node(@linked_list[index2+index])
+      end
+    end
+    @linked_list[-1].change_node(nil)
+  end
+
 end
 
 
@@ -114,5 +123,9 @@ p list1.list
 p list1.size
 
 p list1.contains?(0)
+
+p list1.to_s
+
+list1.insert_at(56, 3)
 
 p list1.to_s
