@@ -78,6 +78,54 @@ class Tree
     return node
   end
 
+  def find(value, node=root)
+    return node if node.data == value
+
+    if value < node.data 
+      node = find(value, node.left)
+    else
+      node = find(value, node.right)
+    end
+    return node
+  end
+
+  def level_order(node = root, queue = [])
+    puts node.data
+    queue.push(node.left) unless node.left == nil
+    queue.push(node.right) unless node.right == nil
+    if queue.length == 0 
+      return
+    end
+    level_order(queue.shift, queue)
+  end
+
+  def inorder(node = root)
+    if node == nil
+      return
+    end
+    inorder(node.left)
+    puts node.data
+    inorder(node.right)
+  end
+
+  def preorder(node = root)
+    if node == nil
+      return
+    end
+    puts node.data
+    preorder(node.left)
+    preorder(node.right)
+  end
+
+  def postorder(node = root)
+    if node == nil
+      return
+    end
+    postorder(node.left)
+    postorder(node.right)
+    puts node.data
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -96,3 +144,7 @@ tree1.pretty_print
 tree1.delete(3)
 tree1.delete(8)
 tree1.pretty_print
+
+# p tree1.find(4)
+
+p tree1.postorder()
